@@ -86,14 +86,17 @@ func main() {
 	fmt.Print("How many iterations? ")
 	fmt.Scanln(&loops)
 
-	var wins []bool
+	var wins int
+
+	rand.Seed(time.Now().UTC().UnixNano())
 
 	for i := 0; i < loops; i++ {
-		rand.Seed(time.Now().UTC().UnixNano())
 		w := SimulateGameShow(doors, sd)
-		wins = append(wins, w)
+		if w {
+			wins++
+		}
 	}
 
-	fmt.Println(wins)
+	fmt.Printf("You won %d out of %d times!", wins, loops)
 
 }
